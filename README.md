@@ -2,8 +2,13 @@
 
 > Official implementation of **CARPRT (ICLR 2026)** â€” a training-free, black-box method for class-aware prompt reweighting in vision-language models.
 
+> **Comparison fork:** this branch adds a side-by-side evaluation using the
+> original OpenAI CLIP ViT-B/16 checkpoint and an independently trained
+> **OpenCLIP ViT-B/16 checkpoint (`laion2b_s34b_b88k`)**. The CARPRT algorithm,
+> prompts, datasets, and temperature are shared between the two runs.
+
 [![Paper](https://img.shields.io/badge/Paper-OpenReview-blue)](https://openreview.net/pdf?id=AScQDQqVXY)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
 
 ---
@@ -34,11 +39,13 @@ The procedure consists of two stages:
 ---
 
 ## Installation
-We recommend a conda environment with **Python 3.8+** and a **CUDA** build of PyTorch (the code calls `.cuda()` for model and tensors).
+We recommend a conda environment with **Python 3.9+** and a **CUDA** build of
+PyTorch. This comparison fork also supports explicit `mps` and `cpu` devices,
+although CUDA will be substantially faster for the full benchmark.
 
 ```bash
 # 1) Create and activate environment 
-conda create -y -n carprt python=3.8
+conda create -y -n carprt python=3.10
 conda activate carprt
 # 2) Clone and enter the repository
 git clone <YOUR_REPO_URL>.git
@@ -64,8 +71,12 @@ Place datasets under **`--data-root`** (default in code: `/projects/datasets` â€
 | Argument | Required | Description |
 |----------|----------|-------------|
 | `--datasets` | Yes | One or more dataset ids, **slash-separated** (e.g. `caltech101/dtd` or `I/A`). |
-| `--backbone` | Yes | CLIP backbone: `RN50` or `ViT-B/16`. |
+| `--backbone` | Yes | CLIP backbone: `RN50` or `ViT-B/16`. OpenCLIP comparison runs require `ViT-B/16`. |
+| `--model-source` | No | `openai`, `openclip`, or `both` (default). `both` runs the models sequentially and prints a comparison table. |
+| `--openclip-pretrained` | No | OpenCLIP checkpoint tag (default: `laion2b_s34b_b88k`). |
 | `--data-root` | No | Root folder for all benchmarks (see default in `test.py`). |
+| `--device` | No | PyTorch device: `auto` (default), `cuda`, `mps`, or `cpu`. |
+| `--batch-size` | No | Evaluation batch size (default: `512`; reduce if memory is insufficient). |
 | `--temp` | No | Temperature for softmax over prompt weights (default `1.0`). |
 | `--config` | No | Reserved; unused (kept for backward-compatible command lines). |
 
@@ -91,14 +102,63 @@ python test.py \
   --data-root /path/to/datasets
 ```
 
+This now runs both comparison checkpoints because `--model-source` defaults to
+`both`. To reproduce the original OpenAI-only behavior, add
+`--model-source openai`.
+
 **Batch evaluation** (several sets in one run):
 
 ```bash
 python test.py \
   --datasets caltech101/dtd/eurosat/food101/oxford_pets \
   --backbone ViT-B/16 \
+  --model-source both \
   --data-root /path/to/datasets \
   --temp 1.0
+```
+
+### OpenCLIP comparison design
+
+The comparison uses:
+
+| Condition | Model | Pretraining |
+|-----------|-------|-------------|
+| Reference | OpenAI CLIP `ViT-B/16` | OpenAI checkpoint used by the paper |
+| Comparison | OpenCLIP `ViT-B-16` | `laion2b_s34b_b88k` (LAION-2B) |
+
+The architecture is held as close as practical while the training data,
+training implementation, and learned checkpoint change. Both conditions use
+the same dataset loaders, class names, 247 prompt templates, CARPRT weighting
+code, and `--temp` value. Models are loaded one at a time to limit peak GPU
+memory.
+
+At the end of a `--model-source both` run, the script prints one row per dataset
+with both CARPRT accuracies and `OpenCLIP - OpenAI`. This delta compares the
+resulting classifiers; it is **not** the CARPRT-vs-WPE method gain. To test
+whether CARPRT's improvement itself is model-independent, evaluate the same
+baseline under both checkpoints as a separate follow-up.
+
+OpenCLIP and OpenAI CLIP can learn different similarity scales. Keep
+`--temp` fixed for the primary controlled comparison, then repeat a small
+temperature sensitivity sweep if the conclusion depends on score calibration.
+
+Examples for running just one condition:
+
+```bash
+# Original paper checkpoint
+python test.py \
+  --datasets caltech101 \
+  --backbone ViT-B/16 \
+  --model-source openai \
+  --data-root /path/to/datasets
+
+# Independent LAION-2B checkpoint
+python test.py \
+  --datasets caltech101 \
+  --backbone ViT-B/16 \
+  --model-source openclip \
+  --openclip-pretrained laion2b_s34b_b88k \
+  --data-root /path/to/datasets
 ```
 
 ---

@@ -1,8 +1,11 @@
 import argparse
+import gc
 
-import clip
 import torch
 import torch.nn.functional as F
+from tabulate import tabulate
+
+from models import OPENCLIP_PRETRAINED, load_model, resolve_device
 
 from utils import (
     build_test_data_loader,
@@ -36,6 +39,28 @@ def get_arguments():
         choices=['RN50', 'ViT-B/16'],
         required=True,
         help='CLIP backbone.',
+    )
+    parser.add_argument(
+        '--model-source',
+        choices=['openai', 'openclip', 'both'],
+        default='both',
+        help='VLM implementation to evaluate (default: both comparison models).',
+    )
+    parser.add_argument(
+        '--openclip-pretrained',
+        default=OPENCLIP_PRETRAINED,
+        help='OpenCLIP pretrained checkpoint tag.',
+    )
+    parser.add_argument(
+        '--device',
+        default='auto',
+        help='PyTorch device, e.g. cuda, mps, cpu, or auto (default).',
+    )
+    parser.add_argument(
+        '--batch-size',
+        type=int,
+        default=512,
+        help='Evaluation batch size (reduce this if GPU memory is insufficient).',
     )
     parser.add_argument('--temp', dest='temp', type=float, default=1.0, help='Temperature for softmax over prompt weights.')
     return parser.parse_args()
@@ -92,18 +117,76 @@ def main():
     args = get_arguments()
     _ = args.config
 
-    clip_model, preprocess = clip.load(args.backbone)
-    clip_model.eval()
+    if args.model_source in {'openclip', 'both'} and args.backbone != 'ViT-B/16':
+        raise SystemExit('--model-source openclip/both requires --backbone ViT-B/16')
+    if args.batch_size < 1:
+        raise SystemExit('--batch-size must be positive')
+
+    device = resolve_device(args.device)
+    model_sources = ['openai', 'openclip'] if args.model_source == 'both' else [args.model_source]
+    print(f'Using device: {device}')
 
     datasets = args.datasets.split('/')
+    results = {dataset_name: {} for dataset_name in datasets}
+
+    # Load and release models one at a time so the comparison does not require
+    # enough memory to hold both VLMs simultaneously.
+    for source in model_sources:
+        loaded = load_model(
+            source,
+            args.backbone,
+            device,
+            openclip_pretrained=args.openclip_pretrained,
+        )
+        print(f'\nEvaluating {loaded.name}')
+
+        for dataset_name in datasets:
+            print(f"Processing {dataset_name} dataset.")
+            test_loader, classnames, template = build_test_data_loader(
+                dataset_name,
+                args.data_root,
+                loaded.preprocess,
+                batch_size=args.batch_size,
+            )
+
+            text_feature = clip_classifier(
+                classnames,
+                template,
+                loaded.model,
+                loaded.tokenizer,
+                device,
+            )
+            acc_carprt = run_test_carprt(
+                test_loader,
+                loaded.model,
+                text_feature,
+                args.temp,
+            )
+            results[dataset_name][source] = acc_carprt
+
+            print("---- CARPRT's test accuracy: {:.2f}. ----\n".format(acc_carprt))
+            del text_feature, test_loader
+
+        del loaded
+        gc.collect()
+        if device.type == 'cuda':
+            torch.cuda.empty_cache()
+
+    headers = ['Dataset'] + model_sources
+    if model_sources == ['openai', 'openclip']:
+        headers.append('OpenCLIP - OpenAI')
+
+    rows = []
     for dataset_name in datasets:
-        print(f"Processing {dataset_name} dataset.")
-        test_loader, classnames, template = build_test_data_loader(dataset_name, args.data_root, preprocess)
+        row = [dataset_name]
+        row.extend(f'{results[dataset_name][source]:.2f}' for source in model_sources)
+        if model_sources == ['openai', 'openclip']:
+            delta = results[dataset_name]['openclip'] - results[dataset_name]['openai']
+            row.append(f'{delta:+.2f}')
+        rows.append(row)
 
-        text_feature = clip_classifier(classnames, template, clip_model)
-        acc_wpe = run_test_carprt(test_loader, clip_model, text_feature, args.temp)
-
-        print("---- CARPRT's test accuracy: {:.2f}. ----\n".format(acc_wpe))
+    print('\nCARPRT comparison summary')
+    print(tabulate(rows, headers=headers, tablefmt='github'))
 
 
 if __name__ == "__main__":

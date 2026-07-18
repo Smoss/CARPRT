@@ -7,3 +7,4 @@ tabulate==0.9.0
 ftfy==6.1.1
 regex==2023.12.25
 gdown==5.1.0
+open_clip_torch==3.2.0
