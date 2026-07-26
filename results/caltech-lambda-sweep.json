@@ -1,0 +1,81 @@
+{
+  "backbone": "ViT-B/16",
+  "batch_size": 85,
+  "device": "mps",
+  "model_source": "openai",
+  "openclip_pretrained": "laion2b_s34b_b88k",
+  "results": {
+    "caltech101": {
+      "openai": {
+        "CARPRT-lambda-0.001": {
+          "accuracy": 92.69776876267748,
+          "correct": 2285,
+          "total": 2465
+        },
+        "CARPRT-lambda-0.003": {
+          "accuracy": 92.94117647058823,
+          "correct": 2291,
+          "total": 2465
+        },
+        "CARPRT-lambda-0.01": {
+          "accuracy": 92.86004056795132,
+          "correct": 2289,
+          "total": 2465
+        },
+        "CARPRT-lambda-0.03": {
+          "accuracy": 92.73833671399595,
+          "correct": 2286,
+          "total": 2465
+        },
+        "CARPRT-lambda-0.07": {
+          "accuracy": 92.5760649087221,
+          "correct": 2282,
+          "total": 2465
+        },
+        "CARPRT-lambda-0.1": {
+          "accuracy": 92.5760649087221,
+          "correct": 2282,
+          "total": 2465
+        },
+        "CARPRT-lambda-0.3": {
+          "accuracy": 92.5760649087221,
+          "correct": 2282,
+          "total": 2465
+        },
+        "CARPRT-lambda-1": {
+          "accuracy": 92.5760649087221,
+          "correct": 2282,
+          "total": 2465
+        },
+        "CARPRT-release": {
+          "accuracy": 94.48275862068965,
+          "correct": 2329,
+          "total": 2465
+        },
+        "MPE": {
+          "accuracy": 92.5760649087221,
+          "correct": 2282,
+          "total": 2465
+        },
+        "WPE": {
+          "accuracy": 93.02231237322515,
+          "correct": 2293,
+          "total": 2465
+        },
+        "elapsed_seconds": 125.61621879041195,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    }
+  },
+  "score_lambdas": [
+    0.001,
+    0.003,
+    0.01,
+    0.03,
+    0.07,
+    0.1,
+    0.3,
+    1.0
+  ],
+  "temperature": 1.0
+}

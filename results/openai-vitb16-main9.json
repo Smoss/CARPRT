@@ -1,0 +1,247 @@
+{
+  "backbone": "ViT-B/16",
+  "batch_size": 85,
+  "device": "mps",
+  "model_source": "openai",
+  "openclip_pretrained": "laion2b_s34b_b88k",
+  "results": {
+    "caltech101": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 92.86004056795132,
+          "correct": 2289,
+          "total": 2465
+        },
+        "CARPRT-release": {
+          "accuracy": 94.48275862068965,
+          "correct": 2329,
+          "total": 2465
+        },
+        "MPE": {
+          "accuracy": 92.5760649087221,
+          "correct": 2282,
+          "total": 2465
+        },
+        "WPE": {
+          "accuracy": 93.02231237322515,
+          "correct": 2293,
+          "total": 2465
+        },
+        "elapsed_seconds": 122.9340095417574,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    },
+    "dtd": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 47.22222222222222,
+          "correct": 799,
+          "total": 1692
+        },
+        "CARPRT-release": {
+          "accuracy": 49.11347517730496,
+          "correct": 831,
+          "total": 1692
+        },
+        "MPE": {
+          "accuracy": 46.808510638297875,
+          "correct": 792,
+          "total": 1692
+        },
+        "WPE": {
+          "accuracy": 47.104018912529554,
+          "correct": 797,
+          "total": 1692
+        },
+        "elapsed_seconds": 82.90186124946922,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    },
+    "eurosat": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 52.74074074074074,
+          "correct": 4272,
+          "total": 8100
+        },
+        "CARPRT-release": {
+          "accuracy": 54.839506172839506,
+          "correct": 4442,
+          "total": 8100
+        },
+        "MPE": {
+          "accuracy": 51.97530864197531,
+          "correct": 4210,
+          "total": 8100
+        },
+        "WPE": {
+          "accuracy": 49.666666666666664,
+          "correct": 4023,
+          "total": 8100
+        },
+        "elapsed_seconds": 145.06040745787323,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    },
+    "fgvc": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 22.232223222322233,
+          "correct": 741,
+          "total": 3333
+        },
+        "CARPRT-release": {
+          "accuracy": 24.752475247524753,
+          "correct": 825,
+          "total": 3333
+        },
+        "MPE": {
+          "accuracy": 22.05220522052205,
+          "correct": 735,
+          "total": 3333
+        },
+        "WPE": {
+          "accuracy": 23.462346234623464,
+          "correct": 782,
+          "total": 3333
+        },
+        "elapsed_seconds": 180.5259481249377,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    },
+    "food101": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 84.98349834983499,
+          "correct": 25750,
+          "total": 30300
+        },
+        "CARPRT-release": {
+          "accuracy": 85.84818481848185,
+          "correct": 26012,
+          "total": 30300
+        },
+        "MPE": {
+          "accuracy": 84.85478547854785,
+          "correct": 25711,
+          "total": 30300
+        },
+        "WPE": {
+          "accuracy": 85.68316831683168,
+          "correct": 25962,
+          "total": 30300
+        },
+        "elapsed_seconds": 666.57443637494,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    },
+    "oxford_flowers": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 65.44863987007714,
+          "correct": 1612,
+          "total": 2463
+        },
+        "CARPRT-release": {
+          "accuracy": 71.37637028014616,
+          "correct": 1758,
+          "total": 2463
+        },
+        "MPE": {
+          "accuracy": 64.23061307348762,
+          "correct": 1582,
+          "total": 2463
+        },
+        "WPE": {
+          "accuracy": 66.62606577344701,
+          "correct": 1641,
+          "total": 2463
+        },
+        "elapsed_seconds": 127.85882487427443,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    },
+    "oxford_pets": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 82.91087489779231,
+          "correct": 3042,
+          "total": 3669
+        },
+        "CARPRT-release": {
+          "accuracy": 89.47942218588172,
+          "correct": 3283,
+          "total": 3669
+        },
+        "MPE": {
+          "accuracy": 81.1937857726901,
+          "correct": 2979,
+          "total": 3669
+        },
+        "WPE": {
+          "accuracy": 82.52929953665848,
+          "correct": 3028,
+          "total": 3669
+        },
+        "elapsed_seconds": 99.92280991747975,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    },
+    "stanford_cars": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 65.72565601293371,
+          "correct": 5285,
+          "total": 8041
+        },
+        "CARPRT-release": {
+          "accuracy": 66.21067031463748,
+          "correct": 5324,
+          "total": 8041
+        },
+        "MPE": {
+          "accuracy": 65.57642084317871,
+          "correct": 5273,
+          "total": 8041
+        },
+        "WPE": {
+          "accuracy": 65.81270986195747,
+          "correct": 5292,
+          "total": 8041
+        },
+        "elapsed_seconds": 336.46801758371294,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    },
+    "ucf101": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 68.25270948982289,
+          "correct": 2582,
+          "total": 3783
+        },
+        "CARPRT-release": {
+          "accuracy": 70.12952683055777,
+          "correct": 2653,
+          "total": 3783
+        },
+        "MPE": {
+          "accuracy": 67.53899021940259,
+          "correct": 2555,
+          "total": 3783
+        },
+        "WPE": {
+          "accuracy": 68.3320116309807,
+          "correct": 2585,
+          "total": 3783
+        },
+        "elapsed_seconds": 162.0992784583941,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    }
+  },
+  "score_lambdas": [
+    0.01
+  ],
+  "temperature": 1.0
+}

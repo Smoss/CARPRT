@@ -35,9 +35,10 @@ def resolve_device(device_name):
 def _load_openai_clip(backbone, device):
     # The bundled OpenAI CLIP loader handles its own checkpoint download.
     model, preprocess = clip.load(backbone, device=device, jit=False)
-    if device.type in {'cpu', 'mps'}:
-        # OpenAI CLIP converts CUDA models to fp16, but fp32 has broader CPU/MPS
-        # operator support.
+    if device.type == 'cpu' or (device.type == 'mps' and backbone.startswith('RN')):
+        # CPU needs fp32 operator support. MPS also needs fp32 for CLIP's
+        # ResNets: their fp16 activations and fp32 BatchNorm statistics trigger
+        # an Apple MPSGraph normalization type-mismatch abort.
         model = model.float()
     return LoadedModel(
         name=f'OpenAI CLIP {backbone}',
@@ -60,8 +61,12 @@ def _load_openclip(backbone, pretrained, device):
         pretrained=pretrained,
     )
     model = model.to(device)
-    if device.type in {'cpu', 'mps'}:
+    if device.type == 'cpu':
         model = model.float()
+    else:
+        # Match OpenAI CLIP's native inference precision so checkpoint
+        # comparisons do not also change numerical precision.
+        model = model.half()
 
     return LoadedModel(
         name=f'OpenCLIP {OPENCLIP_MODEL} ({pretrained})',

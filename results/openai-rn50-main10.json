@@ -1,0 +1,273 @@
+{
+  "backbone": "RN50",
+  "batch_size": 85,
+  "device": "mps",
+  "model_source": "openai",
+  "openclip_pretrained": "laion2b_s34b_b88k",
+  "results": {
+    "caltech101": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 87.05882352941177,
+          "correct": 2146,
+          "total": 2465
+        },
+        "CARPRT-release": {
+          "accuracy": 88.64097363083164,
+          "correct": 2185,
+          "total": 2465
+        },
+        "MPE": {
+          "accuracy": 86.36916835699797,
+          "correct": 2129,
+          "total": 2465
+        },
+        "WPE": {
+          "accuracy": 87.09939148073022,
+          "correct": 2147,
+          "total": 2465
+        },
+        "elapsed_seconds": 102.6701082913205,
+        "model_name": "OpenAI CLIP RN50"
+      }
+    },
+    "dtd": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 41.725768321513,
+          "correct": 706,
+          "total": 1692
+        },
+        "CARPRT-release": {
+          "accuracy": 40.7210401891253,
+          "correct": 689,
+          "total": 1692
+        },
+        "MPE": {
+          "accuracy": 41.48936170212766,
+          "correct": 702,
+          "total": 1692
+        },
+        "WPE": {
+          "accuracy": 41.78486997635934,
+          "correct": 707,
+          "total": 1692
+        },
+        "elapsed_seconds": 58.75846675038338,
+        "model_name": "OpenAI CLIP RN50"
+      }
+    },
+    "eurosat": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 29.296296296296298,
+          "correct": 2373,
+          "total": 8100
+        },
+        "CARPRT-release": {
+          "accuracy": 36.839506172839506,
+          "correct": 2984,
+          "total": 8100
+        },
+        "MPE": {
+          "accuracy": 29.34567901234568,
+          "correct": 2377,
+          "total": 8100
+        },
+        "WPE": {
+          "accuracy": 33.666666666666664,
+          "correct": 2727,
+          "total": 8100
+        },
+        "elapsed_seconds": 65.24767962563783,
+        "model_name": "OpenAI CLIP RN50"
+      }
+    },
+    "fgvc": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 16.261626162616263,
+          "correct": 542,
+          "total": 3333
+        },
+        "CARPRT-release": {
+          "accuracy": 16.981698169816983,
+          "correct": 566,
+          "total": 3333
+        },
+        "MPE": {
+          "accuracy": 16.141614161416143,
+          "correct": 538,
+          "total": 3333
+        },
+        "WPE": {
+          "accuracy": 16.44164416441644,
+          "correct": 548,
+          "total": 3333
+        },
+        "elapsed_seconds": 151.5256242081523,
+        "model_name": "OpenAI CLIP RN50"
+      }
+    },
+    "food101": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 75.56765676567657,
+          "correct": 22897,
+          "total": 30300
+        },
+        "CARPRT-release": {
+          "accuracy": 76.70297029702971,
+          "correct": 23241,
+          "total": 30300
+        },
+        "MPE": {
+          "accuracy": 75.39273927392739,
+          "correct": 22844,
+          "total": 30300
+        },
+        "WPE": {
+          "accuracy": 76.68316831683168,
+          "correct": 23235,
+          "total": 30300
+        },
+        "elapsed_seconds": 391.7058009998873,
+        "model_name": "OpenAI CLIP RN50"
+      }
+    },
+    "oxford_flowers": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 58.79009338205441,
+          "correct": 1448,
+          "total": 2463
+        },
+        "CARPRT-release": {
+          "accuracy": 65.48924076329679,
+          "correct": 1613,
+          "total": 2463
+        },
+        "MPE": {
+          "accuracy": 57.003654080389765,
+          "correct": 1404,
+          "total": 2463
+        },
+        "WPE": {
+          "accuracy": 60.779537149817294,
+          "correct": 1497,
+          "total": 2463
+        },
+        "elapsed_seconds": 109.39968954212964,
+        "model_name": "OpenAI CLIP RN50"
+      }
+    },
+    "oxford_pets": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 78.19569364949578,
+          "correct": 2869,
+          "total": 3669
+        },
+        "CARPRT-release": {
+          "accuracy": 86.01798855273917,
+          "correct": 3156,
+          "total": 3669
+        },
+        "MPE": {
+          "accuracy": 76.45134914145544,
+          "correct": 2805,
+          "total": 3669
+        },
+        "WPE": {
+          "accuracy": 80.18533660397928,
+          "correct": 2942,
+          "total": 3669
+        },
+        "elapsed_seconds": 68.04724954068661,
+        "model_name": "OpenAI CLIP RN50"
+      }
+    },
+    "stanford_cars": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 55.97562492227335,
+          "correct": 4501,
+          "total": 8041
+        },
+        "CARPRT-release": {
+          "accuracy": 56.42333043153837,
+          "correct": 4537,
+          "total": 8041
+        },
+        "MPE": {
+          "accuracy": 55.70202711105584,
+          "correct": 4479,
+          "total": 8041
+        },
+        "WPE": {
+          "accuracy": 56.60987439373212,
+          "correct": 4552,
+          "total": 8041
+        },
+        "elapsed_seconds": 266.3418744588271,
+        "model_name": "OpenAI CLIP RN50"
+      }
+    },
+    "sun397": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 59.65239294710327,
+          "correct": 11841,
+          "total": 19850
+        },
+        "CARPRT-release": {
+          "accuracy": 61.33501259445844,
+          "correct": 12175,
+          "total": 19850
+        },
+        "MPE": {
+          "accuracy": 59.3551637279597,
+          "correct": 11782,
+          "total": 19850
+        },
+        "WPE": {
+          "accuracy": 60.31234256926952,
+          "correct": 11972,
+          "total": 19850
+        },
+        "elapsed_seconds": 821.5737702073529,
+        "model_name": "OpenAI CLIP RN50"
+      }
+    },
+    "ucf101": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 60.5604017975152,
+          "correct": 2291,
+          "total": 3783
+        },
+        "CARPRT-release": {
+          "accuracy": 63.3888448321438,
+          "correct": 2398,
+          "total": 3783
+        },
+        "MPE": {
+          "accuracy": 59.027227068464185,
+          "correct": 2233,
+          "total": 3783
+        },
+        "WPE": {
+          "accuracy": 62.49008723235527,
+          "correct": 2364,
+          "total": 3783
+        },
+        "elapsed_seconds": 110.53802349977195,
+        "model_name": "OpenAI CLIP RN50"
+      }
+    }
+  },
+  "score_lambdas": [
+    0.01
+  ],
+  "temperature": 1.0
+}

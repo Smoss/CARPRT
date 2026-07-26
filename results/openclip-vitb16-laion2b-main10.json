@@ -1,0 +1,273 @@
+{
+  "backbone": "ViT-B/16",
+  "batch_size": 85,
+  "device": "mps",
+  "model_source": "openclip",
+  "openclip_pretrained": "laion2b_s34b_b88k",
+  "results": {
+    "caltech101": {
+      "openclip": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 96.22718052738337,
+          "correct": 2372,
+          "total": 2465
+        },
+        "CARPRT-release": {
+          "accuracy": 96.71399594320486,
+          "correct": 2384,
+          "total": 2465
+        },
+        "MPE": {
+          "accuracy": 96.06490872210954,
+          "correct": 2368,
+          "total": 2465
+        },
+        "WPE": {
+          "accuracy": 96.34888438133875,
+          "correct": 2375,
+          "total": 2465
+        },
+        "elapsed_seconds": 97.12559516634792,
+        "model_name": "OpenCLIP ViT-B-16 (laion2b_s34b_b88k)"
+      }
+    },
+    "dtd": {
+      "openclip": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 55.73286052009456,
+          "correct": 943,
+          "total": 1692
+        },
+        "CARPRT-release": {
+          "accuracy": 55.141843971631204,
+          "correct": 933,
+          "total": 1692
+        },
+        "MPE": {
+          "accuracy": 55.378250591016545,
+          "correct": 937,
+          "total": 1692
+        },
+        "WPE": {
+          "accuracy": 55.673758865248224,
+          "correct": 942,
+          "total": 1692
+        },
+        "elapsed_seconds": 58.68556662462652,
+        "model_name": "OpenCLIP ViT-B-16 (laion2b_s34b_b88k)"
+      }
+    },
+    "eurosat": {
+      "openclip": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 49.77777777777778,
+          "correct": 4032,
+          "total": 8100
+        },
+        "CARPRT-release": {
+          "accuracy": 52.23456790123457,
+          "correct": 4231,
+          "total": 8100
+        },
+        "MPE": {
+          "accuracy": 49.44444444444444,
+          "correct": 4005,
+          "total": 8100
+        },
+        "WPE": {
+          "accuracy": 50.75308641975309,
+          "correct": 4111,
+          "total": 8100
+        },
+        "elapsed_seconds": 116.42837712541223,
+        "model_name": "OpenCLIP ViT-B-16 (laion2b_s34b_b88k)"
+      }
+    },
+    "fgvc": {
+      "openclip": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 25.382538253825384,
+          "correct": 846,
+          "total": 3333
+        },
+        "CARPRT-release": {
+          "accuracy": 26.912691269126913,
+          "correct": 897,
+          "total": 3333
+        },
+        "MPE": {
+          "accuracy": 24.722472247224722,
+          "correct": 824,
+          "total": 3333
+        },
+        "WPE": {
+          "accuracy": 26.702670267026704,
+          "correct": 890,
+          "total": 3333
+        },
+        "elapsed_seconds": 150.02474724967033,
+        "model_name": "OpenCLIP ViT-B-16 (laion2b_s34b_b88k)"
+      }
+    },
+    "food101": {
+      "openclip": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 82.4026402640264,
+          "correct": 24968,
+          "total": 30300
+        },
+        "CARPRT-release": {
+          "accuracy": 83.86138613861387,
+          "correct": 25410,
+          "total": 30300
+        },
+        "MPE": {
+          "accuracy": 82.3102310231023,
+          "correct": 24940,
+          "total": 30300
+        },
+        "WPE": {
+          "accuracy": 83.57755775577557,
+          "correct": 25324,
+          "total": 30300
+        },
+        "elapsed_seconds": 580.001837416552,
+        "model_name": "OpenCLIP ViT-B-16 (laion2b_s34b_b88k)"
+      }
+    },
+    "oxford_flowers": {
+      "openclip": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 67.23507917174177,
+          "correct": 1656,
+          "total": 2463
+        },
+        "CARPRT-release": {
+          "accuracy": 72.39139261063744,
+          "correct": 1783,
+          "total": 2463
+        },
+        "MPE": {
+          "accuracy": 64.96142915144134,
+          "correct": 1600,
+          "total": 2463
+        },
+        "WPE": {
+          "accuracy": 68.98091758018677,
+          "correct": 1699,
+          "total": 2463
+        },
+        "elapsed_seconds": 106.55288674961776,
+        "model_name": "OpenCLIP ViT-B-16 (laion2b_s34b_b88k)"
+      }
+    },
+    "oxford_pets": {
+      "openclip": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 85.4183701281003,
+          "correct": 3134,
+          "total": 3669
+        },
+        "CARPRT-release": {
+          "accuracy": 90.35159443990187,
+          "correct": 3315,
+          "total": 3669
+        },
+        "MPE": {
+          "accuracy": 82.58381030253474,
+          "correct": 3030,
+          "total": 3669
+        },
+        "WPE": {
+          "accuracy": 88.63450531479967,
+          "correct": 3252,
+          "total": 3669
+        },
+        "elapsed_seconds": 86.30753316730261,
+        "model_name": "OpenCLIP ViT-B-16 (laion2b_s34b_b88k)"
+      }
+    },
+    "stanford_cars": {
+      "openclip": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 90.18778758860839,
+          "correct": 7252,
+          "total": 8041
+        },
+        "CARPRT-release": {
+          "accuracy": 90.54843924884965,
+          "correct": 7281,
+          "total": 8041
+        },
+        "MPE": {
+          "accuracy": 90.12560626787713,
+          "correct": 7247,
+          "total": 8041
+        },
+        "WPE": {
+          "accuracy": 90.31215023007088,
+          "correct": 7262,
+          "total": 8041
+        },
+        "elapsed_seconds": 282.5681325001642,
+        "model_name": "OpenCLIP ViT-B-16 (laion2b_s34b_b88k)"
+      }
+    },
+    "sun397": {
+      "openclip": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 70.66498740554157,
+          "correct": 14027,
+          "total": 19850
+        },
+        "CARPRT-release": {
+          "accuracy": 71.42569269521411,
+          "correct": 14178,
+          "total": 19850
+        },
+        "MPE": {
+          "accuracy": 70.11586901763224,
+          "correct": 13918,
+          "total": 19850
+        },
+        "WPE": {
+          "accuracy": 70.85642317380352,
+          "correct": 14065,
+          "total": 19850
+        },
+        "elapsed_seconds": 859.0203119590878,
+        "model_name": "OpenCLIP ViT-B-16 (laion2b_s34b_b88k)"
+      }
+    },
+    "ucf101": {
+      "openclip": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 66.58736452550886,
+          "correct": 2519,
+          "total": 3783
+        },
+        "CARPRT-release": {
+          "accuracy": 67.69759450171821,
+          "correct": 2561,
+          "total": 3783
+        },
+        "MPE": {
+          "accuracy": 65.82077716098334,
+          "correct": 2490,
+          "total": 3783
+        },
+        "WPE": {
+          "accuracy": 66.93100713719271,
+          "correct": 2532,
+          "total": 3783
+        },
+        "elapsed_seconds": 116.58718841709197,
+        "model_name": "OpenCLIP ViT-B-16 (laion2b_s34b_b88k)"
+      }
+    }
+  },
+  "score_lambdas": [
+    0.01
+  ],
+  "temperature": 1.0
+}

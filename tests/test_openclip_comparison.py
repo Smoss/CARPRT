@@ -9,6 +9,7 @@ from unittest import mock
 import torch
 
 from models import OPENCLIP_PRETRAINED, load_model
+from test import run_test_methods
 from utils import clip_classifier, get_clip_logits, get_res_logits
 
 
@@ -64,6 +65,38 @@ class ComparisonTests(unittest.TestCase):
         result_logits = get_res_logits(images, model, text_features, weights)
         self.assertEqual(result_logits.shape, (2, 2))
 
+    def test_method_metrics_count_images_instead_of_averaging_batches(self):
+        model = FakeVLM()
+        text_features = torch.tensor(
+            [
+                [[2.0, 0.0], [0.0, 2.0]],
+                [[1.0, 0.0], [0.0, 1.0]],
+            ]
+        )
+        loader = [
+            (
+                torch.tensor([[1.0, 0.0], [0.0, 1.0]]),
+                torch.tensor([0, 1]),
+            ),
+            (
+                torch.tensor([[1.0, 0.0]]),
+                torch.tensor([0]),
+            ),
+        ]
+
+        metrics = run_test_methods(
+            loader,
+            model,
+            text_features,
+            temp=1.0,
+            score_lambdas=[0.01],
+        )
+
+        for method in ('MPE', 'WPE', 'CARPRT-lambda-0.01', 'CARPRT-release'):
+            self.assertEqual(metrics[method]['correct'], 3)
+            self.assertEqual(metrics[method]['total'], 3)
+            self.assertEqual(metrics[method]['accuracy'], 100.0)
+
     def test_openclip_loader_uses_requested_laion_checkpoint(self):
         model = FakeVLM()
         preprocess = object()
@@ -91,6 +124,14 @@ class ComparisonTests(unittest.TestCase):
         self.assertEqual(calls['pretrained'], 'laion2b_s34b_b88k')
         self.assertIs(loaded.preprocess, preprocess)
         self.assertIs(loaded.tokenizer, fake_tokenizer)
+
+    def test_openai_rn50_uses_fp32_on_mps(self):
+        model = FakeVLM().half()
+
+        with mock.patch('models.clip.load', return_value=(model, object())):
+            loaded = load_model('openai', 'RN50', torch.device('mps'))
+
+        self.assertEqual(next(loaded.model.parameters()).dtype, torch.float32)
 
 
 if __name__ == '__main__':

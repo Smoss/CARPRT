@@ -1,0 +1,39 @@
+{
+  "backbone": "ViT-B/16",
+  "batch_size": 85,
+  "device": "mps",
+  "model_source": "openai",
+  "openclip_pretrained": "laion2b_s34b_b88k",
+  "results": {
+    "sun397": {
+      "openai": {
+        "CARPRT-lambda-0.01": {
+          "accuracy": 65.32997481108312,
+          "correct": 12968,
+          "total": 19850
+        },
+        "CARPRT-release": {
+          "accuracy": 66.93198992443325,
+          "correct": 13286,
+          "total": 19850
+        },
+        "MPE": {
+          "accuracy": 64.92191435768262,
+          "correct": 12887,
+          "total": 19850
+        },
+        "WPE": {
+          "accuracy": 65.7632241813602,
+          "correct": 13054,
+          "total": 19850
+        },
+        "elapsed_seconds": 990.6780608752742,
+        "model_name": "OpenAI CLIP ViT-B/16"
+      }
+    }
+  },
+  "score_lambdas": [
+    0.01
+  ],
+  "temperature": 1.0
+}

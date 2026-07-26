@@ -6,3 +6,13 @@ __pycache__/
 .venv/
 venv/
 *.pt
+.cache/
+data/
+results/*
+!results/caltech-lambda-sweep.json
+!results/full-matrix-summary.json
+!results/full-matrix.csv
+!results/openai-rn50-main10.json
+!results/openai-vitb16-main9.json
+!results/openai-vitb16-sun397.json
+!results/openclip-vitb16-laion2b-main10.json
